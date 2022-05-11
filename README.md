@@ -1,2 +1,4 @@
 # pokedex-android
-Repository Pokedex application with Android
+Repository Pokedex application with 
+
+![Pokedex Android](screenshot.png)
