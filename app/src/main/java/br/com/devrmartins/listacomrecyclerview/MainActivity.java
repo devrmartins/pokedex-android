@@ -8,9 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.List;
 
@@ -27,27 +31,40 @@ import retrofit2.Call;
 public class MainActivity extends AppCompatActivity implements PokemonListAdapter.PokemonListClickListener {
 
     RecyclerView recyclerView;
+    ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PokemonService.getPokemons(new IGetPokemonsCallback() {
-            @Override
-            public void onResponse(List<Pokemon> pokemons) {
-                initRecyclerView(pokemons);
-            }
+        shimmerFrameLayout = findViewById(R.id.placeholder);
 
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onFailure(Throwable t) {
-                showToast(t.getMessage());
+            public void run() {
+                PokemonService.getPokemons(new IGetPokemonsCallback() {
+                    @Override
+                    public void onResponse(List<Pokemon> pokemons) {
+                        shimmerFrameLayout.stopShimmer();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+                        initRecyclerView(pokemons);
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        shimmerFrameLayout.stopShimmer();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+                        showToast(t.getMessage());
+                    }
+                });
             }
-        });
+        }, 3000);
     }
 
     private void initRecyclerView(List<Pokemon> pokemons) {
-        this.recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         PokemonListAdapter adapter = new PokemonListAdapter(pokemons, this);
         recyclerView.setAdapter(adapter);

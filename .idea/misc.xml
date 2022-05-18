@@ -10,7 +10,9 @@
         <entry key="..\:/Users/rbarbosama/dev/android/lista-com-recycler-view/app/src/main/res/drawable/rounded_black_200.xml" value="0.1125" />
         <entry key="..\:/Users/rbarbosama/dev/android/lista-com-recycler-view/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/rbarbosama/dev/android/lista-com-recycler-view/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/rbarbosama/dev/android/lista-com-recycler-view/app/src/main/res/layout/placeholder_pokemon_list_row.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/rbarbosama/dev/android/lista-com-recycler-view/app/src/main/res/layout/pokemon_list_row.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/rbarbosama/dev/android/lista-com-recycler-view/app/src/main/res/layout/shimmer_pokemon_list.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
